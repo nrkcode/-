@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject enemyBullet;
+    float fireDelay; //총알 발사 간격
+
     Animator animator;
     bool onDead;
     float time;
@@ -14,6 +17,16 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         onDead = false;
         time = 0.0f;
+    }
+
+    public void FireBullet()
+    {
+        fireDelay += Time.deltaTime;
+        if(fireDelay > 3f)
+        {
+            Instantiate(enemyBullet,transform.position, Quaternion.identity);
+            fireDelay -= 3f;
+        }
     }
 
     // Update is called once per frame
@@ -27,6 +40,7 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        FireBullet();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
