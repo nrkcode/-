@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public GameObject enemyBullet;
+    GameObject player;
     float fireDelay; //총알 발사 간격
 
     Animator animator;
@@ -17,10 +18,14 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         onDead = false;
         time = 0.0f;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void FireBullet()
     {
+        if (player == null)
+            return;
+
         fireDelay += Time.deltaTime;
         if(fireDelay > 3f)
         {
