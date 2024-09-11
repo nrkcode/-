@@ -72,11 +72,20 @@ public class EnemyController : MonoBehaviour
             animator.SetInteger("State", 1);
             OnDead();
         }
+        if (collision.CompareTag("BlockCollider"))
+        {
+            OnDisappear();
+        }
     }
 
     private void OnDead()
     {
         onDead = true;
         // 스코어 증가 코드 작성
+    }
+
+    private void OnDisappear()
+    {
+        Destroy(gameObject);
     }
 }
