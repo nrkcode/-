@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
     float moveSpeed;
     Rigidbody2D rg2D;
 
+    // ¾ÆÀÌÅÛ
+    public GameObject[] item;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,11 @@ public class EnemyController : MonoBehaviour
         if (time > 0.6f)
         {
             Destroy(gameObject);
+            if (gameObject.CompareTag("ItemDropEnemy"))
+            {
+                int temp = Random.Range(0, 2);
+                Instantiate(item[temp], transform.position, Quaternion.identity);
+            }
         }
         FireBullet();
     }
